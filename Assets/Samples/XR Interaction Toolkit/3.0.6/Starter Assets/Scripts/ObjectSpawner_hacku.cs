@@ -7,7 +7,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// <summary>
     /// Behavior with an API for spawning objects from a given set of prefabs.
     /// </summary>
-    public class ObjectSpawner : MonoBehaviour
+    public class ObjectSpawner_hacku : MonoBehaviour
     {
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
@@ -16,6 +16,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// <summary>
         /// The camera that objects will face when spawned. If not set, defaults to the <see cref="Camera.main"/> camera.
         /// </summary>
+        
+        
         public Camera cameraToFace
         {
             get
@@ -69,12 +71,14 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             get => m_SpawnOptionIndex;
             set => m_SpawnOptionIndex = value;
         }
+
         /// <summary>
         /// Whether this behavior will select a random object from <see cref="objectPrefabs"/> each time it spawns.
         /// </summary>
         /// <seealso cref="spawnOptionIndex"/>
         /// <seealso cref="RandomizeSpawnOption"/>
         public bool isSpawnOptionRandomized => m_SpawnOptionIndex < 0 || m_SpawnOptionIndex >= m_ObjectPrefabs.Count;
+
 
         [SerializeField]
         [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
