@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine.XR.Interaction.Toolkit.Utilities;
+using UnityEngine;
+
 
 namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 {
@@ -16,6 +18,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// <summary>
         /// The camera that objects will face when spawned. If not set, defaults to the <see cref="Camera.main"/> camera.
         /// </summary>
+        
+        
         public Camera cameraToFace
         {
             get
@@ -69,12 +73,14 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             get => m_SpawnOptionIndex;
             set => m_SpawnOptionIndex = value;
         }
+
         /// <summary>
         /// Whether this behavior will select a random object from <see cref="objectPrefabs"/> each time it spawns.
         /// </summary>
         /// <seealso cref="spawnOptionIndex"/>
         /// <seealso cref="RandomizeSpawnOption"/>
         public bool isSpawnOptionRandomized => m_SpawnOptionIndex < 0 || m_SpawnOptionIndex >= m_ObjectPrefabs.Count;
+
 
         [SerializeField]
         [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
@@ -191,6 +197,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// <seealso cref="objectSpawned"/>
         public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
         {
+            // スポーンポイントがカメラの視界内にあるかどうかを確認
             if (m_OnlySpawnInView)
             {
                 var inViewMin = m_ViewportPeriphery;
@@ -203,33 +210,49 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                 }
             }
 
+            // スポーンするオブジェクトのインデックスを決定
             var objectIndex = isSpawnOptionRandomized ? Random.Range(0, m_ObjectPrefabs.Count) : m_SpawnOptionIndex;
-            var newObject = Instantiate(m_ObjectPrefabs[objectIndex]);
-            if (m_SpawnAsChildren)
-                newObject.transform.parent = transform;
+            var slope = Instantiate(m_ObjectPrefabs[0]);
+            var cube = Instantiate(m_ObjectPrefabs[1]);
 
-            newObject.transform.position = spawnPoint;
+            if (m_SpawnAsChildren)
+                slope.transform.parent = transform;
+            
+            // オブジェクトの位置を設定
+            
+            
+            
+            //cubeのスクリプトにアクセス
+            cube.GetComponent<cube_generator>().CreateCube(0.2f,0.2f,0.2f);
+            slope.GetComponent<slope_generator>().CreateSlope(1f,0.5f,1f);
+            slope.transform.position = spawnPoint;
+            cube.transform.position = spawnPoint+new Vector3(0.5f,0,0.5f);
             EnsureFacingCamera();
 
-            var facePosition = m_CameraToFace.transform.position;
+            // オブジェクトの向きをカメラに向ける
+            /* var facePosition = m_CameraToFace.transform.position;
             var forward = facePosition - spawnPoint;
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-            newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
+            newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal); */
 
-            if (m_ApplyRandomAngleAtSpawn)
+            // ランダムな角度でオブジェクトを回転させる
+            /* if (m_ApplyRandomAngleAtSpawn)
             {
                 var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
                 newObject.transform.Rotate(Vector3.up, randomRotation);
-            }
+            } */
 
-            if (m_SpawnVisualizationPrefab != null)
+            // スポーン可視化プレハブが設定されている場合、スポーン位置に可視化を生成
+            /* if (m_SpawnVisualizationPrefab != null)
             {
                 var visualizationTrans = Instantiate(m_SpawnVisualizationPrefab).transform;
                 visualizationTrans.position = spawnPoint;
                 visualizationTrans.rotation = newObject.transform.rotation;
-            }
-
-            objectSpawned?.Invoke(newObject);
+            } */
+            
+            // オブジェクトがスポーンされたことを通知
+            objectSpawned?.Invoke(cube);
+            objectSpawned?.Invoke(slope);
             return true;
         }
     }

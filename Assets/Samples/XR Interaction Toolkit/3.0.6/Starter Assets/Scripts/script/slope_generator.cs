@@ -6,11 +6,10 @@ public class slope_generator : MonoBehaviour
     public float y = 1;
     public float z = 1;
  void Start () {
-		CreateSlope(x, y, z);
 	}
 
 
-	private void CreateSlope (float X,float Y,float Z) {
+	public void CreateSlope (float X,float Y,float Z) {
 		Vector3[] vertices = {
 			new Vector3 (0, 0, 0),
 			new Vector3 (X, 0, 0),

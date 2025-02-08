@@ -21,6 +21,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             /// <summary>
             /// Use the forward direction of the head (camera) as the forward direction of the XR Origin's movement.
             /// </summary>
+            /// 
             HeadRelative,
 
             /// <summary>
