@@ -223,10 +223,10 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             
             
             //cubeのスクリプトにアクセス
-            cube.GetComponent<cube_generator>().CreateCube(0.2f,0.2f,0.2f);
-            slope.GetComponent<slope_generator>().CreateSlope(1f,0.5f,1f);
-            slope.transform.position = spawnPoint;
-            cube.transform.position = spawnPoint+new Vector3(0.5f,0,0.5f);
+            cube.GetComponent<cube_generator>().CreateCube(0.08f,0.08f,0.08f,spawnPoint);
+            //slope.GetComponent<slope_generator>().CreateSlope(0.25f,0.2f,0.25f);
+            //slope.transform.position = spawnPoint;
+            cube.transform.position = cube.transform.position+new Vector3(0.1f,0,0.1f);
             EnsureFacingCamera();
 
             // オブジェクトの向きをカメラに向ける
@@ -252,7 +252,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             
             // オブジェクトがスポーンされたことを通知
             objectSpawned?.Invoke(cube);
-            objectSpawned?.Invoke(slope);
+            //objectSpawned?.Invoke(slope);
             return true;
         }
     }

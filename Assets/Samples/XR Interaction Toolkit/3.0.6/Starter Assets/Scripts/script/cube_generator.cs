@@ -15,7 +15,7 @@ using UnityEngine;
         
     }
 
-    public void CreateCube (float X_size,float Y_size,float Z_size) {
+    public void CreateCube (float X_size,float Y_size,float Z_size,Vector3 position){ {
         //get Cube object of child
         GameObject cube = this.transform.GetChild(0).gameObject;
 
@@ -24,7 +24,7 @@ using UnityEngine;
         //resize the object to the given size
         transform.localScale = new Vector3(X_size,Y_size,Z_size);
         //set the position of the object on the floor
-        transform.position = transform.position + new Vector3(0,transform.position.y + Y_size/2,0);
+        transform.position = position + new Vector3(0,Y_size/2 ,0);
     }
-}
+}}
 
