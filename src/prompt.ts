@@ -25,7 +25,7 @@ Return = {
     '剛体': list[Rigidbody],
     'バネ': list[Spring],
     '糸': list[String]
-}`.replace('\n', '\\n');
+}`.replaceAll('\n', '\\n');
 
 export const prompt = (requestBody: string) => `{
 "contents": [{
