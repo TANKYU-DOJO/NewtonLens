@@ -1,19 +1,14 @@
 {
-  "name": "hacku",
-  "version": "0.0.0",
-  "private": true,
+  "name": "hacku2025",
   "scripts": {
-    "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "test": "vitest",
-    "cf-typegen": "wrangler types"
+    "deploy": "wrangler deploy --minify"
+  },
+  "dependencies": {
+    "hono": "^4.6.20"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.6.4",
-    "@cloudflare/workers-types": "^4.20250204.0",
-    "typescript": "^5.5.2",
-    "vitest": "2.1.8",
-    "wrangler": "^3.107.3"
+    "@cloudflare/workers-types": "^4.20250109.0",
+    "wrangler": "^3.101.0"
   }
 }
