@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class AI
 {
-    private const string url = @"https://script.google.com/macros/library/d/1omx6S755rUvh6-9DsI9QL15O6KW2pQnHeWlg7OTebQY1wwt6lLCOi6Gm/7";
+    private const string url = @"https://hacku2025.weathered-limit-8e5c.workers.dev";
     private HttpRequestMessage request;
     private HttpClient client;
 
