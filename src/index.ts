@@ -11,6 +11,7 @@ app.post('/', async (c) => {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`;
   const body = await c.req.json();
   const response = await fetch(url, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
