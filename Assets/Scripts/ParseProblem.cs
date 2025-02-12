@@ -5,9 +5,9 @@ using UnityEngine;
 public class ParseProblem {
     [System.Serializable]
     public class RigidbodyDefinition {
-        public string name;
-        public string mass;
-        public int x, y;
+        public string name; // オブジェクト名
+        public string mass; // 質量
+        public int x, y; // 初期位置
     }
 
     [System.Serializable]
@@ -22,10 +22,10 @@ public class ParseProblem {
         public string length; // 糸の長さ
     }
 
-    public List<string> objects;
-    public List<RigidbodyDefinition> rigidbodies;
-    public List<SpringDefinition> springs;
-    public List<StringDefinition> strings;
+    public List<string> objects; // "壁"または"床"または"天井"
+    public List<RigidbodyDefinition> rigidbodies; // 剛体
+    public List<SpringDefinition> springs; // ばね
+    public List<StringDefinition> strings; // 糸
 
     public ParseProblem(string jsonText) {
         JsonUtility.FromJsonOverwrite(jsonText, this);
