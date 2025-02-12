@@ -209,24 +209,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                     return false;
                 }
             }
-
-            // スポーンするオブジェクトのインデックスを決定
-            var objectIndex = isSpawnOptionRandomized ? Random.Range(0, m_ObjectPrefabs.Count) : m_SpawnOptionIndex;
-            var slope = Instantiate(m_ObjectPrefabs[0]);
-            var cube = Instantiate(m_ObjectPrefabs[1]);
-
-            if (m_SpawnAsChildren)
-                slope.transform.parent = transform;
             
             // オブジェクトの位置を設定
             
-            
-            
-            //cubeのスクリプトにアクセス
-            cube.GetComponent<cube_generator>().CreateCube(0.08f,0.08f,0.08f,spawnPoint);
-            //slope.GetComponent<slope_generator>().CreateSlope(0.25f,0.2f,0.25f);
-            //slope.transform.position = spawnPoint;
-            cube.transform.position = cube.transform.position+new Vector3(0.1f,0,0.1f);
+            object_generator Object_generator = this.GetComponent<object_generator>();
+            Object_generator.SpawnPendulum(spawnPoint+new Vector3(0.0f, 1.2f, 0.0f), 1.0f, false, 30f);
             EnsureFacingCamera();
 
             // オブジェクトの向きをカメラに向ける
@@ -251,7 +238,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             } */
             
             // オブジェクトがスポーンされたことを通知
-            objectSpawned?.Invoke(cube);
             //objectSpawned?.Invoke(slope);
             return true;
         }

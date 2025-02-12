@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI; // Add this line to include the UnityEngine.UI namespace
-using NativeCameraNamespace;
-using System.Text.RegularExpressions; // Ensure this line is correct
 
-public class loadimg : MonoBehaviour
+public class take_picture : MonoBehaviour
 {
     public RawImage imageDisplay; // 撮影した画像を表示するUI
+    public UnityEvent<string> OnPhotoCaptured; // 画像が撮影されたときに呼び出すイベント
     public void Start()
     {
         // カメラの使用許可をリクエスト
@@ -26,6 +26,8 @@ public class loadimg : MonoBehaviour
                     return;
                 }
 
+                OnPhotoCaptured.Invoke(path);
+                
                 // UIに画像を表示
                 imageDisplay.texture = texture;
                 Debug.Log("画像パス: " + path);

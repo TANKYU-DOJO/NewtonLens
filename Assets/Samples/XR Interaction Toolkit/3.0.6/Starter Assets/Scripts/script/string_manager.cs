@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEditor; // Remove this line if not needed
 using UnityEngine;
 
@@ -33,7 +34,23 @@ public class string_manager : MonoBehaviour
         end_point.GetComponent<HingeJoint>().anchor = new Vector3(0, string_length, 0);
 
         //set the string angle
-        end_point.transform.localEulerAngles = new Vector3(0, 0, start_angle);
+        end_point.transform.localPosition=new Vector3(0,-string_length*math.cos(start_angle),string_length*math.sin(start_angle));
+
+        try
+        {
+            //endの子のすべてのRigidbodyを取得してisKinematicをtrueにする
+            foreach (Rigidbody rb in end.GetComponentsInChildren<Rigidbody>())
+            {
+                rb.isKinematic = true;
+
+                //log
+                Debug.Log("Rigidbody is attached to the end object");
+            }
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("Rigidbody is not attached to the end object");
+        }
     }
 
     void Update()

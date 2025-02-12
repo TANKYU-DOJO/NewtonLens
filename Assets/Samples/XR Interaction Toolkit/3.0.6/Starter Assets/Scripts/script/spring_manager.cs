@@ -1,4 +1,4 @@
-using Mono.Cecil.Cil;
+
 using UnityEngine;
 
 public class spring : MonoBehaviour
@@ -32,6 +32,21 @@ public class spring : MonoBehaviour
 
         //set the string length
         end_point.transform.position = start_point.transform.position - new Vector3(0, string_length, 0);
+        try
+        {
+            //endの子のすべてのRigidbodyを取得してisKinematicをtrueにする
+            foreach (Rigidbody rb in end.GetComponentsInChildren<Rigidbody>())
+            {
+                rb.isKinematic = true;
+
+                //log
+                Debug.Log("Rigidbody is attached to the end object");
+            }
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("Rigidbody is not attached to the end object");
+        }
     }
 
     void Update()
@@ -43,6 +58,6 @@ public class spring : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(spring_constant * (start_point.transform.position - end_point.transform.position));
+        rb.AddForce(-spring_constant * (end_point.transform.position - start_point.transform.position + new Vector3(0, string_length, 0)));
     }
 }
