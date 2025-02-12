@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Problem
+namespace ProblemInterpreter
 {
     [System.Serializable]
     public class Parsed {

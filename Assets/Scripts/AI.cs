@@ -4,32 +4,35 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-public class AI
+namespace ProblemInterpreter
 {
-    private const string url = @"https://hacku2025.weathered-limit-8e5c.workers.dev";
-    private HttpRequestMessage request;
-    private HttpClient client;
-
-    public AI()
+    public class AI
     {
-        request = new HttpRequestMessage(HttpMethod.Post, url);
-        request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("Accept-Charset", "utf-8");
-        client = new HttpClient();
-    }
+        private const string url = @"https://hacku2025.weathered-limit-8e5c.workers.dev";
+        private HttpRequestMessage request;
+        private HttpClient client;
 
-    // AIにデータを送りつけ、返答を得る
-    public async Task<string> Ask(string imagePath)
-    {
-        byte[] imageBytes = await File.ReadAllBytesAsync(imagePath);
-        var base64string = Convert.ToBase64String(imageBytes);
-        string mimeType = $"image/{Path.GetExtension(imagePath).TrimStart('.')}";
-        string json = $"\"mime_type\": \"{mimeType}\", \"data\": \"{base64string}\"";
-        var content = new StringContent("{"+json+"}", Encoding.UTF8, "application/json");
+        public AI()
+        {
+            request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Accept-Charset", "utf-8");
+            client = new HttpClient();
+        }
 
-        var response = await client.PostAsync(url, content);
-        var body = await response.Content.ReadAsStringAsync();
+        // AIにデータを送りつけ、返答を得る
+        public async Task<string> Ask(string imagePath)
+        {
+            byte[] imageBytes = await File.ReadAllBytesAsync(imagePath);
+            var base64string = Convert.ToBase64String(imageBytes);
+            string mimeType = $"image/{Path.GetExtension(imagePath).TrimStart('.')}";
+            string json = $"\"mime_type\": \"{mimeType}\", \"data\": \"{base64string}\"";
+            var content = new StringContent("{" + json + "}", Encoding.UTF8, "application/json");
 
-        return body;
+            var response = await client.PostAsync(url, content);
+            var body = await response.Content.ReadAsStringAsync();
+
+            return body;
+        }
     }
 }
