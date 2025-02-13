@@ -8,7 +8,7 @@ namespace ProblemInterpreter
         [System.Serializable]
         public class RigidbodyDefinition {
             public string name; // オブジェクト名
-            public string shape; // 形状。"直方体"または"球体"
+            public string shape; // 形状。直方体|球体|板|台車
             public string mass; // 質量
             public int x, y; // 初期位置
             public string vx, vy; // 初速度
