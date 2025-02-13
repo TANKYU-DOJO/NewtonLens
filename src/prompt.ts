@@ -10,29 +10,29 @@ const text = `添付した物理の問題から、問題に登場する運動す
 enum Mass {大, 中, 小}
 enum Shape {直方体, 球体}
 Rigidbody = {
-    '物体の名前': str,
-    '形状': Shape,
-    '質量': Mass,
-    '初期位置のX座標': int,
-    '初期位置のY座標': int,
-    '初速度のx成分': str,
-    '初速度のy成分': str
+    "物体の名前": str,
+    "形状": Shape,
+    "質量": Mass,
+    "初期位置のX座標": int,
+    "初期位置のY座標": int,
+    "初速度のx成分": str,
+    "初速度のy成分": str
 }
 enum Environment {壁, 床, 天井, 斜面}
 Spring = {
-    'バネが繋いでいる物体の名前': list[str],
-    'バネの自然長': str
+    "バネが繋いでいる物体の名前": list[str],
+    "バネの自然長": str
 }
 String = {
-    '糸が繋いでいる物体の名前': list[str],
-    '糸の長さ': str
+    "糸が繋いでいる物体の名前": list[str],
+    "糸の長さ": str
 }
 Return = {
-    '環境': list[Environment],
-    '剛体': list[Rigidbody],
-    'バネ': list[Spring],
-    '糸': list[String]
-}`.replaceAll('\n', '\\n');
+    "環境": list[Environment],
+    "剛体": list[Rigidbody],
+    "バネ": list[Spring],
+    "糸": list[String]
+}`.replaceAll("\n", "\\n").replaceAll("\"", "\\\"");
 
 export const prompt = (requestBody: string) => `{
 "contents": [{
