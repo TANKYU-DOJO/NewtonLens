@@ -13,9 +13,9 @@ export function RenameJsonKey(jsonText: string)
         "初期位置のY座標": "y",
         "初速度のx成分": "vx",
         "初速度のy成分": "vy",
-        "糸が繋いでいる物体の名前": "connections",
+        "糸が繋いでいる物体及び環境の名前": "connections",
         "糸の長さ": "length",
-        "バネが繋いでいる物体の名前": "connections",
+        "バネが繋いでいる物体及び環境の名前": "connections",
         "バネ定数": "konstant",
         "バネの自然長": "length",
     }
