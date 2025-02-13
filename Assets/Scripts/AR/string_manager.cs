@@ -15,26 +15,23 @@ public class string_manager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        init_string();
-    }
-
-    void init_string()
-    {    GameObject start = null;
+        GameObject start = null;
         // Instantiate the start and end objects
         var end = Instantiate(end_obj, end_point.transform.position, Quaternion.identity);
-        if (start_obj != null){
+        if (start_obj != null)
+        {
             start = Instantiate(start_obj, start_point.transform.position, Quaternion.identity);
             //start_pointの子にする
             start.transform.parent = start_point.transform;
-        }  
-        
+        }
+
         end.transform.parent = end_point.transform;
 
         //set the string length
         end_point.GetComponent<HingeJoint>().anchor = new Vector3(0, string_length, 0);
 
         //set the string angle
-        end_point.transform.localPosition=new Vector3(0,-string_length*math.cos(start_angle),string_length*math.sin(start_angle));
+        end_point.transform.localPosition = new Vector3(0, -string_length * math.cos(start_angle), string_length * math.sin(start_angle));
 
         try
         {

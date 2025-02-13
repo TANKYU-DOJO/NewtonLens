@@ -15,19 +15,21 @@ public class spring : MonoBehaviour
     void Start()
     {
         init_spring();
-        rb= end_point.GetComponent<Rigidbody>();
+        rb = end_point.GetComponent<Rigidbody>();
     }
 
     void init_spring()
-    {    GameObject start = null;
+    {
+        GameObject start = null;
         // Instantiate the start and end objects
         var end = Instantiate(end_obj, end_point.transform.position, Quaternion.identity);
-        if (start_obj != null){
+        if (start_obj != null)
+        {
             start = Instantiate(start_obj, start_point.transform.position, Quaternion.identity);
             //start_pointの子にする
             start.transform.parent = start_point.transform;
-        }  
-        
+        }
+
         end.transform.parent = end_point.transform;
 
         //set the string length
@@ -53,7 +55,7 @@ public class spring : MonoBehaviour
     {
         var positions = new Vector3[] { start_point.transform.position, end_point.transform.position, };
         lineRenderer?.SetPositions(positions);
-        
+
     }
 
     void FixedUpdate()
