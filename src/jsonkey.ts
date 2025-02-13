@@ -8,12 +8,16 @@ export function RenameJsonKey(jsonText: string)
         "糸": "strings",
         "物体の名前": "name",
         "質量": "mass",
-        "X座標": "x",
-        "Y座標": "y",
+        "形状": "shape",
+        "初期位置のX座標": "x",
+        "初期位置のY座標": "y",
+        "初速度のx成分": "vx",
+        "初速度のy成分": "vy",
         "糸が繋いでいる物体の名前": "connections",
         "糸の長さ": "length",
         "バネが繋いでいる物体の名前": "connections",
         "バネ定数": "konstant",
+        "バネの自然長": "length",
     }
 
     let result = jsonText;
