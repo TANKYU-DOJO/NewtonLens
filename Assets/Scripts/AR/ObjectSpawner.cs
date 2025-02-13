@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
 [RequireComponent(typeof(ARRaycastManager))]
-public class ObjectSpawner_ : MonoBehaviour
+public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject spawnObject;
     private ARRaycastManager arRaycastManager;

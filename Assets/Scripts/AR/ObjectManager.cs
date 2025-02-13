@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Behavior with an API for spawning objects from a given set of prefabs.
 /// </summary>
-public class ObjectSpawner : MonoBehaviour
+public class ObjectManager : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
