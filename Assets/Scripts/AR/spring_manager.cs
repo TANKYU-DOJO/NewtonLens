@@ -1,53 +1,31 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class spring : MonoBehaviour
+public class spring_manager : MonoBehaviour
 {
-    [SerializeField] GameObject start_point;
-    [SerializeField] GameObject end_point;
-    [SerializeField] LineRenderer lineRenderer;
+    public GameObject start_point;
+    public GameObject end_point;
+    private LineRenderer lineRenderer;
     public float spring_constant = 1.0f;
-    public GameObject end_obj;
-    public GameObject start_obj;
     public float string_length = 1.0f;
-    private Rigidbody rb;
+    private Rigidbody rb_s;
+    private Rigidbody rb_e;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void Start()
     {
-        init_spring();
-        rb = end_point.GetComponent<Rigidbody>();
+        init_spring();  
     }
-
-    void init_spring()
+    public void init_spring()
     {
-        GameObject start = null;
-        // Instantiate the start and end objects
-        var end = Instantiate(end_obj, end_point.transform.position, Quaternion.identity);
-        if (start_obj != null)
+        rb_e = end_point?.GetComponent<Rigidbody>();
+        rb_s = start_point?.GetComponent<Rigidbody>();
+        lineRenderer = this.AddComponent<LineRenderer>();
+        if (lineRenderer != null)
         {
-            start = Instantiate(start_obj, start_point.transform.position, Quaternion.identity);
-            //start_pointの子にする
-            start.transform.parent = start_point.transform;
-        }
-
-        end.transform.parent = end_point.transform;
-
-        //set the string length
-        end_point.transform.position = start_point.transform.position - new Vector3(0, string_length, 0);
-        try
-        {
-            //endの子のすべてのRigidbodyを取得してisKinematicをtrueにする
-            foreach (Rigidbody rb in end.GetComponentsInChildren<Rigidbody>())
-            {
-                rb.isKinematic = true;
-
-                //log
-                Debug.Log("Rigidbody is attached to the end object");
-            }
-        }
-        catch (System.Exception)
-        {
-            Debug.Log("Rigidbody is not attached to the end object");
+            lineRenderer.startWidth = 0.1f;
+            lineRenderer.endWidth = 0.1f;
         }
     }
 
@@ -60,6 +38,7 @@ public class spring : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(-spring_constant * (end_point.transform.position - start_point.transform.position + new Vector3(0, string_length, 0)));
+        rb_e?.AddForce(-spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
+        rb_s?.AddForce(spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
     }
 }
