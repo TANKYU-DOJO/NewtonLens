@@ -32,13 +32,22 @@ public class spring_manager : MonoBehaviour
     void Update()
     {
         var positions = new Vector3[] { start_point.transform.position, end_point.transform.position, };
-        lineRenderer?.SetPositions(positions);
+        if(lineRenderer == null){
+            lineRenderer=GetComponent<LineRenderer>();
+        }
+        lineRenderer.SetPositions(positions);
 
     }
 
     void FixedUpdate()
     {
-        rb_e?.AddForce(-spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
-        rb_s?.AddForce(spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
+        if(rb_e == null){
+            rb_e = end_point.GetComponent<Rigidbody>();
+        }
+        if(rb_s == null){
+            rb_s = start_point.GetComponent<Rigidbody>();
+        }
+        if (rb_e!=null) rb_e.AddForce(-spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
+        if (rb_s!=null) rb_s.AddForce(spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
     }
 }

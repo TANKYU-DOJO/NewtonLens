@@ -4,15 +4,12 @@ using Unity.VisualScripting;
 
 public class PhysicsObject : MonoBehaviour
 {
-    //使うprefabを指定
-    [SerializeField] GameObject ceilingPrefab;
-    [SerializeField] GameObject wallPrefab;
-    [SerializeField] GameObject floorPrefab;
+    //使うprefab
+    public GameObject ceilingPrefab;
+    public GameObject wallPrefab;
+    public GameObject floorPrefab;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     public void generateObject(Parsed parsed)
     {
@@ -35,7 +32,7 @@ public class PhysicsObject : MonoBehaviour
             obj.AddComponent<Rigidbody>();
             //子にする
             obj.transform.parent = this.transform;
-            obj.transform.localPosition = new Vector3(rigidbody.x/10, rigidbody.y/10, 0);
+            obj.transform.localPosition = new Vector3(rigidbody.x/10, rigidbody.y/10 + 0.1f, 0);
             obj.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             obj.name = rigidbody.name;
             
@@ -54,13 +51,37 @@ public class PhysicsObject : MonoBehaviour
             }
 
             //初速度を設定
-            obj.GetComponent<Rigidbody>().linearVelocity = new Vector3(float.Parse(rigidbody.vx), float.Parse(rigidbody.vy), 0);
+            float vx = 0;
+            float vy = 0;
+
+            //x軸
+            if (rigidbody.vx != "0")
+            {
+                if(rigidbody.vx=="+"){
+                    vx = 0.5f;
+                }
+                if(rigidbody.vx=="-"){
+                    vx = -0.5f;
+                }
+            }
+            //y軸
+            if (rigidbody.vy != "0")
+            {
+                if(rigidbody.vy=="+"){
+                    vy = 0.5f;
+                }
+                if(rigidbody.vy=="-"){
+                    vy = -0.5f;
+                }
+            }
+            obj.GetComponent<Rigidbody>().linearVelocity = new Vector3(vx, vy, 0);
         }
         Debug.Log(parsed.environments);
         Debug.Log(parsed.rigidbodies);
         //各環境オブジェクト(壁・床・天井)について
         foreach (string environment in parsed.environments)
-        {
+        {   
+            Debug.Log(environment);
             //天井の場合
             if (environment == "天井")
             {
@@ -77,7 +98,7 @@ public class PhysicsObject : MonoBehaviour
                 Debug.Log("壁");
                 GameObject wall = Instantiate(wallPrefab);
                 wall.transform.parent = this.transform;
-                wall.transform.localPosition = new Vector3(0,0,0);
+                wall.transform.localPosition = new Vector3(-0.1f,0,0);
                 wall.name = "壁"; 
             }
 
