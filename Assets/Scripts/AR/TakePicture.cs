@@ -1,16 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI; // Add this line to include the UnityEngine.UI namespace
+using UnityEngine.UI;
 
-public class take_picture : MonoBehaviour
+public class TakePicture
 {
     public RawImage imageDisplay; // 撮影した画像を表示するUI
     public UnityEvent<string> OnPhotoCaptured; // 画像が撮影されたときに呼び出すイベント
-    public void Start()
-    {
-        // カメラの使用許可をリクエスト
-        CapturePhoto();
-    }
+
     // カメラを起動して写真を撮影するメソッド
     public void CapturePhoto()
     {
@@ -27,15 +23,16 @@ public class take_picture : MonoBehaviour
                 }
 
                 OnPhotoCaptured.Invoke(path);
-                
+
                 // UIに画像を表示
                 imageDisplay.texture = texture;
-                Debug.Log("画像パス: " + path);
+                Debug.Log($"画像パス: ${path}");
             }
         });
 
         if (permission == NativeCamera.Permission.Denied || permission == NativeCamera.Permission.ShouldAsk)
         {
             Debug.Log("カメラの使用許可が必要です。");
-        
-}}}
+        }
+    }
+}
