@@ -2,7 +2,7 @@
 export function RenameJsonKey(jsonText: string)
 {
     const newKeys: { [key: string]: string } = {
-        "不動オブジェクト": "objects",
+        "環境": "environments",
         "剛体": "rigidbodies",
         "バネ": "springs",
         "糸": "strings",
