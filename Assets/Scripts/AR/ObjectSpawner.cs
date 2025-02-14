@@ -18,7 +18,8 @@ public class ObjectSpawner : MonoBehaviour
     public GameObject ceilingPrefab;
     public GameObject wallPrefab;
     public GameObject floorPrefab;
-    
+    public GameObject cubePrefab;
+    public GameObject spherePrefab;
 
     void Start()
     {
@@ -47,6 +48,8 @@ public class ObjectSpawner : MonoBehaviour
                     physics_component.ceilingPrefab = ceilingPrefab;
                     physics_component.wallPrefab = wallPrefab;
                     physics_component.floorPrefab = floorPrefab;
+                    physics_component.cube=cubePrefab;
+                    physics_component.sphere=spherePrefab;
 
                     //生成
                     physics_component.generateObject(parsed);

@@ -8,6 +8,8 @@ public class PhysicsObject : MonoBehaviour
     public GameObject ceilingPrefab;
     public GameObject wallPrefab;
     public GameObject floorPrefab;
+    public GameObject cube;
+    public GameObject sphere;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -21,15 +23,16 @@ public class PhysicsObject : MonoBehaviour
             if (rigidbody.shape == "球体")
             {
                 //球体を生成
-                obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                obj = Instantiate(sphere);
             }
             else if (rigidbody.shape == "直方体")
             {
                 //直方体を生成
-                obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                obj = Instantiate(cube);
+            }else if (rigidbody.shape=="台車"){
+                //台車を生成
+                obj = Instantiate(cube);
             }
-            //rigidbodyコンポーネントを追加
-            obj.AddComponent<Rigidbody>();
             //子にする
             obj.transform.parent = this.transform;
             obj.transform.localPosition = new Vector3(rigidbody.x/10, rigidbody.y/10 + 0.1f, 0);
@@ -79,6 +82,9 @@ public class PhysicsObject : MonoBehaviour
             //摩擦をなくす
             obj.GetComponent<Collider>().material.dynamicFriction = 0;
             obj.GetComponent<Collider>().material.staticFriction = 0;
+
+            //マテリアルの設定
+            obj.GetComponent<Renderer>().material.color = Color.white;
         }
         Debug.Log(parsed.environments);
         Debug.Log(parsed.rigidbodies);

@@ -570,6 +570,8 @@ MonoBehaviour:
   ceilingPrefab: {fileID: 2440601295297951793, guid: be4fc8231b54945f2aa3127a0f4cbe6f, type: 3}
   wallPrefab: {fileID: 7113373707486582984, guid: 754e9aa559efb4c2994e845112f7e20d, type: 3}
   floorPrefab: {fileID: 859573970940938581, guid: 1a0d2165ca5774206a64e79dffc61353, type: 3}
+  cubePrefab: {fileID: 3978112941814812862, guid: 675c7ad8e9c9e40bfa684b5442f69bca, type: 3}
+  spherePrefab: {fileID: 3978112941814812862, guid: def0ed71bb3ad493aaf4edc0a94367d0, type: 3}
 --- !u!114 &1106066531
 MonoBehaviour:
   m_ObjectHideFlags: 0
