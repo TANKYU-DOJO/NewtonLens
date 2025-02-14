@@ -75,6 +75,10 @@ public class PhysicsObject : MonoBehaviour
                 }
             }
             obj.GetComponent<Rigidbody>().linearVelocity = new Vector3(vx, vy, 0);
+
+            //摩擦をなくす
+            obj.GetComponent<Collider>().material.dynamicFriction = 0;
+            obj.GetComponent<Collider>().material.staticFriction = 0;
         }
         Debug.Log(parsed.environments);
         Debug.Log(parsed.rigidbodies);
@@ -119,7 +123,7 @@ public class PhysicsObject : MonoBehaviour
             //sptirng_managerの追加
             spring_manager spring_Manager = this.AddComponent<spring_manager>();
             //ばね定数・自然長を設定
-            spring_Manager.spring_constant = 1.0f;
+            spring_Manager.spring_constant = 10;
             spring_Manager.string_length = float.Parse(spring.length)/10;
             //ばねの始点・終点を設定
             spring_Manager.start_point = GameObject.Find(spring.connections[0]);

@@ -40,13 +40,15 @@ public class spring_manager : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
+    {   
+        Debug.Log(spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
         if(rb_e == null){
             rb_e = end_point.GetComponent<Rigidbody>();
         }
         if(rb_s == null){
             rb_s = start_point.GetComponent<Rigidbody>();
         }
+        
         if (rb_e!=null) rb_e.AddForce(-spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
         if (rb_s!=null) rb_s.AddForce(spring_constant * (end_point.transform.position - start_point.transform.position)*(1-(string_length/(end_point.transform.position - start_point.transform.position).magnitude)));
     }
