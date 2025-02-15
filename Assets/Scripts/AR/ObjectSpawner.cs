@@ -10,6 +10,7 @@ public class ObjectSpawner : MonoBehaviour
 
     [SerializeField] private GameObject PhysicsObject;
     private ARRaycastManager arRaycastManager;
+    [SerializeField] GameObject ui_text;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     [SerializeField] private bool spawnedFlag = false; // オブジェクトをすでにスポーンしたかどうか
     public ProblemInterpreter.Parsed parsed;
@@ -70,6 +71,9 @@ public class ObjectSpawner : MonoBehaviour
                 var result = await ai.Ask(path);
                 Debug.Log(result);
                 parsed = new Parsed(result);
+
+                Destroy(ui_text);
+                
             }
         });
     }

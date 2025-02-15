@@ -111,17 +111,15 @@ public class PhysicsObject : MonoBehaviour
                 wall.transform.localPosition = new Vector3(-0.1f,0,0);
                 wall.name = "壁"; 
             }
-
-            //床の場合
-            else if (environment == "床")
-            {
-                Debug.Log("床");
-                GameObject floor = Instantiate(floorPrefab);
-                floor.transform.parent = this.transform;
-                floor.transform.localPosition = new Vector3(0,0,0);
-                floor.name = "床";
-            }
         }
+            //床の場合
+            
+        Debug.Log("床");
+        GameObject floor = Instantiate(floorPrefab);
+        floor.transform.parent = this.transform;
+        floor.transform.localPosition = new Vector3(0,0,0);
+        floor.name = "床";
+        
 
         //ばねの処理
         foreach (Parsed.SpringDefinition spring in parsed.springs)
