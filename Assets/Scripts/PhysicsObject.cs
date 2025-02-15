@@ -61,10 +61,10 @@ public class PhysicsObject : MonoBehaviour
             if (rigidbody.vx != "0")
             {
                 if(rigidbody.vx=="+"){
-                    vx = 0.5f;
+                    vx = 0.9f;
                 }
                 if(rigidbody.vx=="-"){
-                    vx = -0.5f;
+                    vx = -0.9f;
                 }
             }
             //y軸
@@ -74,7 +74,7 @@ public class PhysicsObject : MonoBehaviour
                     vy = 2.0f;
                 }
                 if(rigidbody.vy=="-"){
-                    vy = -0.5f;
+                    vy = -1.0f;
                 }
             }
             obj.GetComponent<Rigidbody>().linearVelocity = new Vector3(vx, vy, 0);
@@ -132,6 +132,22 @@ public class PhysicsObject : MonoBehaviour
             //ばねの始点・終点を設定
             spring_Manager.start_point = GameObject.Find(spring.connections[0]);
             spring_Manager.end_point = GameObject.Find(spring.connections[1]);
+
+            //spring_managerの初期化
+            spring_Manager.init_spring();
+        }
+
+        //ばねの処理
+        foreach (Parsed.StringDefinition String in parsed.strings)
+        {
+            //sptirng_managerの追加
+            spring_manager spring_Manager = this.AddComponent<spring_manager>();
+            //ばね定数・自然長を設定
+            spring_Manager.spring_constant = 9999;
+            spring_Manager.string_length = float.Parse(String.length)/10;
+            //ばねの始点・終点を設定
+            spring_Manager.start_point = GameObject.Find(String.connections[0]);
+            spring_Manager.end_point = GameObject.Find(String.connections[1]);
 
             //spring_managerの初期化
             spring_Manager.init_spring();
