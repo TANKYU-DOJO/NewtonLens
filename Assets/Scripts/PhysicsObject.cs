@@ -71,7 +71,7 @@ public class PhysicsObject : MonoBehaviour
             if (rigidbody.vy != "0")
             {
                 if(rigidbody.vy=="+"){
-                    vy = 0.5f;
+                    vy = 2.0f;
                 }
                 if(rigidbody.vy=="-"){
                     vy = -0.5f;
