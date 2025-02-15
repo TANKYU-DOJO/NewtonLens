@@ -78,4 +78,19 @@ public class ObjectSpawner : MonoBehaviour
         });
     }
 
+    public void removeObject(){
+        spawnedFlag = false;
+        //find physics object and destroy
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("PhysicsObject");
+        foreach (GameObject obj in objects)
+        {
+            Destroy(obj);
+        }
+    }
+
+    public void reload_scene(){
+        //unity load scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
 }
