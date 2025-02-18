@@ -137,7 +137,7 @@ public class PhysicsObject : MonoBehaviour
             spring_Manager.init_spring();
         }
 
-        //ばねの処理
+        //ひもの処理
         foreach (Parsed.StringDefinition String in parsed.strings)
         {
             //sptirng_managerの追加
